@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnToggleTorch; // Use Button instead of ToggleButton
+    private ToggleButton btnTorchState;
     private static final int CAMERA_REQUEST = 1; // Request code for permission
     private boolean isTorchOn = false; // Track flashlight state
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnToggleTorch = findViewById(R.id.toggleButton); // Reference the Button
+        btnTorchState = findViewById(R.id.torchStateButton); // Reference the new ToggleButton
 
         // Check permission in onCreate (optional)
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -68,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
             cameraManager.setTorchMode(cameraId, isTorchOn);
             String message = isTorchOn ? "Torch ON" : "Torch OFF";
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+            // Update ToggleButton state
+            btnTorchState.setChecked(isTorchOn);
         } catch (CameraAccessException e) {
             e.printStackTrace();
             Toast.makeText(this, "Error toggling flashlight", Toast.LENGTH_SHORT).show();

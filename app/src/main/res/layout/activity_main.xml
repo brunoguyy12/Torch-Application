@@ -15,4 +15,11 @@
       android:layout_height="wrap_content"
       android:textSize="20sp" />
 
+  <ToggleButton
+      android:id="@+id/torchStateButton"
+      android:textOff="Torch OFF"
+      android:textOn="Torch ON"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
 </LinearLayout>
